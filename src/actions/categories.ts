@@ -62,7 +62,7 @@ export const createCategory = async ({
   imageUrl,
   name,
 }: CreateCategorySchemaServer) => {
-  const supabase = createClient();
+  const supabase = await createClient();
   const slug = slugify(name, { lower: true });
 
   const { data, error } = await supabase.from("category").insert({
@@ -83,7 +83,7 @@ export const updateCategory = async ({
   name,
   slug,
 }: UpdateCategorySchema) => {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("category")
     .update({ name, imageUrl })
@@ -97,7 +97,7 @@ export const updateCategory = async ({
 };
 
 export const deleteCategory = async (id: number) => {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { error } = await supabase.from("category").delete().match({ id });
 
   if (error) throw new Error(`Error deleting category: ${error.message}`);
@@ -105,20 +105,20 @@ export const deleteCategory = async (id: number) => {
   revalidatePath("/admin/categories");
 };
 
-export const getCategoryData = async () => {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("category")
-    .select("name, products:product(id)");
+// export const getCategoryData = async () => {
+//   const supabase = await createClient();
+//   const { data, error } = await supabase
+//     .from("category")
+//     .select("name, products:product(id)");
 
-  if (error) throw new Error(`Error fetching category data: ${error.message}`);
+//   if (error) throw new Error(`Error fetching category data: ${error.message}`);
 
-  const categoryData = data.map(
-    (category: { name: string; products: { id: number }[] }) => ({
-      name: category.name,
-      products: category.products.length,
-    })
-  );
+//   const categoryData = data.map(
+//     (category: { name: string; products: { id: number }[] }) => ({
+//       name: category.name,
+//       products: category.products.length,
+//     })
+//   );
 
-  return categoryData;
-};
+//   return categoryData;
+// };
