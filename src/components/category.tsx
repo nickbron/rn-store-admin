@@ -61,7 +61,7 @@ export const CategoryTableRow = ({
         <TableCell className="sm:table-cell">
           <Image
             alt="Product image"
-            className="aspect-square rounded-md object-cover"
+            className="aspect-square rounded-md object-contain"
             height="64"
             src={category.imageUrl}
             width="64"

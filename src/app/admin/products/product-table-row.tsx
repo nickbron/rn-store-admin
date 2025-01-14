@@ -49,7 +49,7 @@ export const ProductTableRow = ({
             height={40}
             src={product.heroImage}
             alt="Hero"
-            className="w-10 h-10 object-cover"
+            className="w-10 h-10 object-contain"
           />
         )}
       </TableCell>
@@ -61,7 +61,7 @@ export const ProductTableRow = ({
             key={index}
             src={url}
             alt={`Product ${index + 1}`}
-            className="w-10 h-10 object-cover inline-block mr-1"
+            className="w-10 h-10 object-contain inline-block mr-1"
           />
         ))}
       </TableCell>
