@@ -23,8 +23,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { CategoryTableRow } from "@/components/category";
+import {
+  createCategorySchema,
+  CreateCategorySchema,
+} from "@/app/admin/categories/create-category.schema";
 import { CategoriesWithProductsResponse } from "@/app/admin/categories/categories.types";
-
+import { CategoryForm } from "@/app/admin/categories/category-form";
 import {
   createCategory,
   deleteCategory,
@@ -33,12 +38,6 @@ import {
 } from "@/actions/categories";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import {
-  createCategorySchema,
-  CreateCategorySchema,
-} from "./create-category.schema";
-import { CategoryForm } from "./category-form";
-import { CategoryTableRow } from "@/components/category";
 
 type Props = {
   categories: CategoriesWithProductsResponse;
@@ -105,7 +104,6 @@ const CategoriesPageComponent: FC<Props> = ({ categories }) => {
             toast.success("Category updated successfully");
           }
         }
-        break;
       }
 
       default:

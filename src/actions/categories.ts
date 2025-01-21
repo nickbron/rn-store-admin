@@ -10,10 +10,9 @@ import {
 import { createClient } from "@/supabase/server";
 import { revalidatePath } from "next/cache";
 
-const supabase = await createClient();
-
 export const getCategoriesWithProducts =
   async (): Promise<CategoriesWithProductsResponse> => {
+    const supabase = await createClient();
     const { data, error } = await supabase
       .from("category")
       .select("* , products:product(*)")
@@ -105,20 +104,20 @@ export const deleteCategory = async (id: number) => {
   revalidatePath("/admin/categories");
 };
 
-// export const getCategoryData = async () => {
-//   const supabase = await createClient();
-//   const { data, error } = await supabase
-//     .from("category")
-//     .select("name, products:product(id)");
+export const getCategoryData = async () => {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("category")
+    .select("name, products:product(id)");
 
-//   if (error) throw new Error(`Error fetching category data: ${error.message}`);
+  if (error) throw new Error(`Error fetching category data: ${error.message}`);
 
-//   const categoryData = data.map(
-//     (category: { name: string; products: { id: number }[] }) => ({
-//       name: category.name,
-//       products: category.products.length,
-//     })
-//   );
+  const categoryData = data.map(
+    (category: { name: string; products: { id: number }[] }) => ({
+      name: category.name,
+      products: category.products.length,
+    })
+  );
 
-//   return categoryData;
-// };
+  return categoryData;
+};

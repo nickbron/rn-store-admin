@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { SubmitHandler } from "react-hook-form";
-
+import { SubmitHandler, UseFormReturn } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,7 +18,7 @@ export const CategoryForm = ({
   onSubmit,
   defaultValues,
 }: {
-  form: any;
+  form: UseFormReturn<CreateCategorySchema>;
   onSubmit: SubmitHandler<CreateCategorySchema>;
   defaultValues: CreateCategorySchema | null;
 }) => {

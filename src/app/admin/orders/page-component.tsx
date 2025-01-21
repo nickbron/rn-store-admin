@@ -45,7 +45,7 @@ type OrderedProducts = {
     created_at: string;
     heroImage: string;
     id: number;
-    imagesUrl: string[];
+    imagesUrl: string[] | null;
     maxQuantity: number;
     price: number;
     slug: string;
@@ -112,6 +112,7 @@ export default function PageComponent({ ordersWithProducts }: Props) {
                 </Select>
               </TableCell>
               <TableCell>{order.description || "No Description"}</TableCell>
+
               <TableCell>{order.user.email}</TableCell>
               <TableCell>{order.slug}</TableCell>
               <TableCell>$ {order.totalPrice.toFixed(2)}</TableCell>
@@ -146,7 +147,7 @@ export default function PageComponent({ ordersWithProducts }: Props) {
                           className="mr-2 mb-2 flex items-center space-x-2"
                         >
                           <Image
-                            className="w-16 h-16 object-contain rounded"
+                            className="w-16 h-16 object-cover rounded"
                             src={product.heroImage}
                             alt={product.title}
                             width={64}
